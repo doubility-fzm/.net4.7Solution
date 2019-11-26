@@ -15,6 +15,9 @@ namespace ifc2MCT_transferFactory
         private readonly Dictionary<long, MctElement> _elements = new Dictionary<long, MctElement>();
         private readonly Dictionary<int, MctSection> _sections = new Dictionary<int, MctSection>();
         private readonly HashSet<MctCommonSupport> _supports = new HashSet<MctCommonSupport>();
+        private readonly List<MctElasticLink> _elasticLinks = new List<MctElasticLink>();
+        private readonly List<MctRigidLink> _rigidLinks = new List<MctRigidLink>();
+        private readonly List<MctLink> _linkCollector = new List<MctLink>();
         //private readonly Dictionary<int, (List<bool>, List<MctNode>)> _supports = new Dictionary<int, (List<bool>, List<MctNode>)>();
         public MctUnitSystem UnitSystem {get;set;}
 
@@ -104,6 +107,48 @@ namespace ifc2MCT_transferFactory
             return _nodes;
         }
 
+        public Dictionary<int, MctMaterialValue> GetTotalMaterial()
+        {
+            return _material;
+        }
+
+        public void AddElasticLink(MctElasticLink link)
+        {
+            foreach(var singlelink in _elasticLinks)
+            {
+                if ((singlelink._node1 == link._node1 && singlelink._node2 ==link._node2)||
+                    (singlelink._node2 == link._node1 && singlelink._node1 == link._node2))
+                {
+                    return;
+                }
+            }
+            _elasticLinks.Add(link);
+        }
+
+        public void AddRigidLink(MctRigidLink link)
+        {
+            foreach(var singleLink in _rigidLinks)
+            {
+                if ((singleLink._mainNode == link._mainNode) && (singleLink._subNodes == link._subNodes))
+                    return;       
+            }
+            _rigidLinks.Add(link);
+        }
+
+        public void AddLink(List<MctRigidLink> rigidLinkSet,List<MctElasticLink> elasticLinkSet)
+        {
+            int linkIndexNum = 1;
+            foreach(var rigidLink in rigidLinkSet)
+            {
+                var link = new MctLink() { linkIndex = linkIndexNum++, type = MctLink.MctLinkTypeEnum.RIGD, linkKey = rigidLink._linkKey };
+                _linkCollector.Add(link);
+            }
+            foreach(var elasticLink in elasticLinkSet)
+            {
+                var link = new MctLink() { linkIndex = linkIndexNum++, type = MctLink.MctLinkTypeEnum.ELNK, linkKey = elasticLink.linkNum };
+                _linkCollector.Add(link);
+            }
+        }
         public void WriteMctFile(string path)
         {
             var sw = new StreamWriter(path, false, Encoding.GetEncoding("GB2312"));
@@ -160,6 +205,27 @@ namespace ifc2MCT_transferFactory
             foreach(var support in _supports)
             {
                 sw.WriteLine(support);
+            }
+
+            head = "\n*ELASTICLINK    ; Elastic Link";
+            sw.WriteLine(head);
+            foreach(var link in _elasticLinks)
+            {
+                sw.WriteLine(link);
+            }
+
+            head = "\n*RIGIDLINK    ; Rigid Link";
+            sw.WriteLine(head);
+            foreach (var link in _rigidLinks)
+            {
+                sw.WriteLine(link);
+            }
+
+            head = "\n*LINK-KEY    ; Link Key";
+            sw.WriteLine(head);
+            foreach(var singleLink in _linkCollector)
+            {
+                sw.WriteLine(singleLink);
             }
 
             sw.Close();

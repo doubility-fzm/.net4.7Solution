@@ -23,6 +23,8 @@ namespace ifc2MCT
             new Dictionary<int, SortedList<double, bool>>();
         private readonly MctStore _mctStore = new MctStore();
 
+        private List<MctNode> girderNodeSet = new List<MctNode>();
+
         //转换横梁节点用的变量
         private List<MctNode> LateralBeamNodeSet = new List<MctNode>();
         private int _lateralBeamNums { get; set; }
@@ -31,6 +33,8 @@ namespace ifc2MCT
         private int nodeIndex = 0;
         private int sectionIndex = 1;
         private long elementIndex = 1;
+        private int elasticLinkIndex = 1;
+        private int rigidLinkIndex = 1;
         public TranslateAdaptor(string path)
         {
             if (File.Exists(path))
@@ -150,6 +154,10 @@ namespace ifc2MCT
                 var coordinates = position.Value.Select(p => p.Key).ToList();
                 var nodes = Utilities.TranslatorToolkitFactory.TranslateNodes((IIfcCurve)_ifcModel.Instances[position.Key], coordinates,nodeIndex++);
                 _mctStore.AddNode(nodes);
+                foreach(var node in nodes)
+                {
+                    girderNodeSet.Add(node);
+                }
                 int nodeNums = position.Value.Keys.Count;
                 MctSection sec= null;
                 for (int i=0;i<nodeNums-1;i++)
@@ -272,15 +280,17 @@ namespace ifc2MCT
             var sectionDimensions = TranslatorToolkitFactory.ParseLateralSection(LateralBeamSet[0]);
             var sec = new MctSectionDBUSER(MctSectionDBUSERShapeTypeEnum.DOUBLE_L, sectionDimensions,ref sectionIndex);
             _mctStore.AddSection(sec,ref sectionIndex);
+            var matSet = _mctStore.GetTotalMaterial();
+            var beamMat = matSet.Where(m => m.Value.Type == MctMaterialTypeEnum.STEEL).FirstOrDefault();
 
-            for(int i=0;i<(LateralBeamSet.Count/_lateralBeamNums);i++)
+            for (int i=0;i<(LateralBeamSet.Count/_lateralBeamNums);i++)
             {
                 for(int j=0;j<_lateralBeamNums;j++)
                 {
                     var element = new MctFrameElement()
                     {
                         Id = elementIndex++,
-                        Mat = mat.Where(m => m.Type == MctMaterialTypeEnum.STEEL).FirstOrDefault(),
+                        Mat = beamMat.Value,
                         Sec = sec,
                         Type = MctElementTypeEnum.BEAM,
                         Node1 = LateralBeamNodeSet[i * _lateralBeamNums + j],
@@ -290,7 +300,7 @@ namespace ifc2MCT
                     element = new MctFrameElement()
                     {
                         Id = elementIndex++,
-                        Mat = mat.Where(m => m.Type == MctMaterialTypeEnum.STEEL).FirstOrDefault(),
+                        Mat = beamMat.Value,
                         Sec = sec,
                         Type = MctElementTypeEnum.BEAM,
                         Node1 = LateralBeamNodeSet[i * _lateralBeamNums + j],
@@ -300,7 +310,7 @@ namespace ifc2MCT
                     element = new MctFrameElement()
                     {
                         Id = elementIndex++,
-                        Mat = mat.Where(m => m.Type == MctMaterialTypeEnum.STEEL).FirstOrDefault(),
+                        Mat = beamMat.Value,
                         Sec = sec,
                         Type = MctElementTypeEnum.BEAM,
                         Node2 = LateralBeamNodeSet[i * _lateralBeamNums + j + 2 * (LateralBeamSet.Count + _lateralBeamNums)],
@@ -310,7 +320,7 @@ namespace ifc2MCT
                     element = new MctFrameElement((180,0))
                     {
                         Id = elementIndex++,
-                        Mat = mat.Where(m => m.Type == MctMaterialTypeEnum.STEEL).FirstOrDefault(),
+                        Mat = beamMat.Value,
                         Sec = sec,
                         Type = MctElementTypeEnum.BEAM,
                         Node2 = LateralBeamNodeSet[i * _lateralBeamNums + j + (LateralBeamSet.Count + _lateralBeamNums)],
@@ -320,7 +330,7 @@ namespace ifc2MCT
                     element = new MctFrameElement((180, 0))
                     {
                         Id = elementIndex++,
-                        Mat = mat.Where(m => m.Type == MctMaterialTypeEnum.STEEL).FirstOrDefault(),
+                        Mat = beamMat.Value,
                         Sec = sec,
                         Type = MctElementTypeEnum.BEAM,
                         Node2 = LateralBeamNodeSet[i * _lateralBeamNums + j + 2 * (LateralBeamSet.Count + _lateralBeamNums)],
@@ -329,6 +339,28 @@ namespace ifc2MCT
                     _mctStore.AddElement(element);
                 }
             }
+
+            var elasticLinkCollector = new List<MctElasticLink>();
+            var rigidLinkCollector = new List<MctRigidLink>();
+
+            for(int i=0;i<= LateralBeamSet.Count / _lateralBeamNums;i++)
+            {
+                for(int j=0;j<_lateralBeamNums-1;j++)
+                {
+                    var link = new MctElasticLink(elasticLinkIndex++,LateralBeamNodeSet[i*_lateralBeamNums+j],
+                        LateralBeamNodeSet[i * _lateralBeamNums + j+1]);
+                    elasticLinkCollector.Add(link);
+                    _mctStore.AddElasticLink(link);
+                }
+            }
+            for(int i=0;i<girderNodeSet.Count;i++)
+            {
+                var subNodes = new List<MctNode>() { LateralBeamNodeSet[i], LateralBeamNodeSet[i + girderNodeSet.Count] };
+                var link = new MctRigidLink(rigidLinkIndex++, girderNodeSet[i], subNodes);
+                rigidLinkCollector.Add(link);
+                _mctStore.AddRigidLink(link);
+            }
+            _mctStore.AddLink(rigidLinkCollector, elasticLinkCollector);
             //_mctStore.AddNode(BeamNodesSet);
         }
 
