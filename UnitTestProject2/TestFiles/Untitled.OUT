@@ -1,0 +1,211 @@
+****************************************************************************************************                    
+**             MIDAS/CIVIL V8.8.0 - Modeling, Integrated Design & Analysis Software               **                    
+**                         GENERAL STRUCTURE DESIGN SYSTEM FOR WINDOWS                            **                    
+****************************************************************************************************                    
+                                                                                                                        
+                                   ....xxxxxxxx*********xxxxxxxx......                                                  
+                               xXXXXXX***''               ```***XXXXXXXXXXx.                                            
+                           XXXXXXX                                   ``*XXXXXXXx.                                       
+         XXXXXXXXXX      XXXXXXX XX                                        `*XXXXXX.                                    
+         XXXXXXXXXXX    XXXXXX XXXX                                           `*XXXXX                                   
+         XXXXXXXXXXXX  XXXXXX XXXXX  XXXXX  XXXXXXXXXXx        XXXXX      .XXXX.`XXXXX                                  
+         XXXXXXXXXXXX::XXXXX XXXXXX  XXXXX  XXXXXXXXXXXX      XXXXXXX    :XXXXXX: XXXXX                                 
+         XXXXXX XXXXX XXXXX: XXXXXX  XXXXX  XXXXX   xXXXX    :XXXXXXX:   XXXX:     XXXXX                                
+         XXXXXX  XXXX XXXXX  XXXXXX  XXXXX  XXXXX    XXXXX  :XXXX:XXXX   XXXXXXXXX:                                     
+         XXXXXX  XXX XXXXX:  XXXXXX  XXXXX  XXXXX    :XXXX  XXXXX XXXXX   :XXXXXXXXXX                                   
+         XXXXXX  :XX XXXXX   XXXXXX  XXXXX  XXXXX    :XXXX :XXXX: :XXXX:    `:XXXXXXXX:                                 
+         XXXXXX   XX XXXXX   XXXXXX  XXXXX  XXXXX    XXXXX XXXXX   XXXXX XXXX     XXXXX                                 
+         XXXXXX   XX XXXXX   XXXXXX  XXXXX  XXXXX   xXXXX XXXXX:   :XXXXX:XXXX   .XXXX                                  
+         XXXXXX   :XXXXXXX   XXXXXX  XXXXX  XXXXXXXXXXXX :XXXX:     XXXXX XXXXXXXXXXX:                                  
+         XXXXXX    XXXXXXX   XXXXXX  XXXXX  XXXXXXXXXXx  XXXXX      :XXXXX `XXXXXXX'     /CIVIL                         
+                                                                                                                        
+         ----------------- PC WINDOWS XP/VISTA/7/8/8.1 VERSION. V8.8.0 ------------------                               
+                                                                                                                        
+                  Copyright ¨Ï SINCE 1989 MIDAS Information Technology Co., Ltd.                                        
+                           ALL RIGHTS RESERVED MIDAS IT Co., Ltd.                                                       
+                                                                                                                        
+****************************************************************************************************                    
+  
+  
+ -----------------------------------------S T A R T I N G       S O L U T I O N
+
+ MULTI-FRONTAL SOLVER
+ AVAILABLE MEMORY =   16.0 GBYTES
+
+ INTERNAL DATA REGENERATION ( ENTRY REGEN_MODEL )
+
+**  MIDAS/CIVIL WINDOWS VERSION 8.8.0                                DATE NOV/17/2019  TIME 15:28:49
+**  Modeling, Integrated Design & Analysis Software              PC WINDOWS XP/VISTA/7/8/8.1 VERSION
+====================================================================================================
+  
+  
+ N U M B E R I N G   E Q U A T I O N
+ ===================================
+
+
+ INFORMATION FOR EQUATION NUMBER
+ -------------------------------
+
+  SERIAL   NODE          EQUATION NUMBERS FOR EACH DEGREE OF FREEDOM
+    NO.     NO.         X       Y        Z        XX       YY       ZZ
+ -------  -------   -------- -------- -------- -------- -------- --------
+      1        1           0        0        0        1        2        3
+      2        2           4        5        6        7        8        9
+      3        3          10       11       12       13       14       15
+      4        4          16       17       18       19       20       21
+      5        5          22        0        0       23       24       25
+      6        6           0        0        0       26       27       28
+      7        7          29       30       31       32       33       34
+      8        8          35       36       37       38       39       40
+      9        9          41       42       43       44       45       46
+     10       10          47        0        0       48       49       50
+     11       11           0        0        0       51       52       53
+     12       12          54       55       56       57       58       59
+     13       13          60       61       62       63       64       65
+     14       14          66       67       68       69       70       71
+     15       15          72        0        0       73       74       75
+     16       16           0        0        0       76       77       78
+     17       17          79       80       81       82       83       84
+     18       18          85       86       87       88       89       90
+     19       19          91       92       93       94       95       96
+     20       20          97        0        0       98       99      100
+     21       21           0        0        0      101      102      103
+     22       22         104      105      106      107      108      109
+     23       23         110      111      112      113      114      115
+     24       24         116      117      118      119      120      121
+     25       25         122        0        0      123      124      125
+     26       26           0        0        0      126      127      128
+     27       27         129      130      131      132      133      134
+     28       28         135      136      137      138      139      140
+     29       29         141      142      143      144      145      146
+     30       30         147        0        0      148      149      150
+     31       31           0        0        0      151      152      153
+     32       32         154      155      156      157      158      159
+     33       33         160      161      162      163      164      165
+     34       34         166      167      168      169      170      171
+     35       35         172        0        0      173      174      175
+     36       36           0        0        0      176      177      178
+     37       37         179      180      181      182      183      184
+     38       38         185      186      187      188      189      190
+     39       39         191      192      193      194      195      196
+     40       40         197        0        0      198      199      200
+     41       41           0        0        0      201      202      203
+     42       42         204      205      206      207      208      209
+     43       43         210      211      212      213      214      215
+     44       44         216      217      218      219      220      221
+     45       45         222        0        0      223      224      225
+     46       46           0        0        0      226      227      228
+     47       47         229      230      231      232      233      234
+     48       48         235      236      237      238      239      240
+     49       49         241      242      243      244      245      246
+     50       50         247        0        0      248      249      250
+     51       51           0        0        0      251      252      253
+     52       52         254      255      256      257      258      259
+     53       53         260      261      262      263      264      265
+     54       54         266      267      268      269      270      271
+     55       55         272        0        0      273      274      275
+     56       56           0        0        0      276      277      278
+     57       57         279      280      281      282      283      284
+     58       58         285      286      287      288      289      290
+     59       59         291      292      293      294      295      296
+     60       60         297        0        0      298      299      300
+     61       61           0        0        0      301      302      303
+     62       62         304      305      306      307      308      309
+     63       63         310      311      312      313      314      315
+     64       64         316      317      318      319      320      321
+     65       65         322        0        0      323      324      325
+     66       66           0        0        0      326      327      328
+     67       67         329      330      331      332      333      334
+     68       68         335      336      337      338      339      340
+     69       69         341      342      343      344      345      346
+     70       70         347        0        0      348      349      350
+
+
+ EQUATION STATUS
+ ---------------
+
+ TOTAL NUMBER OF VALID DOFS IN MODEL ..........:     350
+ NUMBER OF EQUATIONS IN A BLOCK ...............:     350
+ NUMBER OF BLOCKS .............................:       1
+ NUMBER OF INTERNAL LOADCASES .................:       1
+
+**  MIDAS/CIVIL WINDOWS VERSION 8.8.0                                DATE NOV/17/2019  TIME 15:28:49
+**  Modeling, Integrated Design & Analysis Software              PC WINDOWS XP/VISTA/7/8/8.1 VERSION
+====================================================================================================
+  
+  
+
+
+ S E T U P   E Q U A T I O N   P R O F I L E
+ ===========================================
+
+
+ THE TOTAL WEIGHT OF MODEL
+ -------------------------
+
+ TOTAL WEIGHT ...........:  9.48679E+06   N   
+
+
+ THE CENTER OF GRAVITY OF FINITE ELEMENT MODEL 
+ ---------------------------------------------
+
+ X-COORDINATE OF C.G ....:  3.89711E+04   MM  
+ Y-COORDINATE OF C.G ....:  2.25000E+04   MM  
+ Z-COORDINATE OF C.G ....:  1.46200E+04   MM  
+ WARNING : NODE NO.     26  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       127
+ WARNING : NODE NO.     16  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.        77
+ WARNING : NODE NO.     41  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       202
+ WARNING : NODE NO.     31  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       152
+ WARNING : NODE NO.      2  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.         8
+ WARNING : NODE NO.     47  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       233
+ WARNING : NODE NO.     61  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       302
+ WARNING : NODE NO.     66  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       327
+ WARNING : NODE NO.     11  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.        52
+ WARNING : NODE NO.     22  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       108
+ WARNING : NODE NO.     36  RY  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       177
+ WARNING : NODE NO.     58  RX  DOF MAY BE SINGULAR.
+ WARNING : EQUATION NO.       288
+
+ STATIC ANALYSIS TIME LOG ( IN SECOND )
+ --------------------------------------
+ MULTI-FRONTAL SOLUTION .....................:     0.06
+ DISPLACEMENT OUTPUT ........................:     0.02
+ STRESS OUTPUT ..............................:     0.03
+ TOTAL SOLUTION TIME (SUM OF THE ABOVE) .....:     0.11
+
+
+**  MIDAS/CIVIL WINDOWS VERSION 8.8.0                                DATE NOV/17/2019  TIME 15:28:49
+**  Modeling, Integrated Design & Analysis Software              PC WINDOWS XP/VISTA/7/8/8.1 VERSION
+====================================================================================================
+  
+  
+
+
+ =========================================================
+ ** O V E R A L L   T I M E   L O G   I N   S E C O N D **
+ =========================================================
+
+  - INPUT DATA READING AND GENERATION ..........:     0.00
+  - FORM ELEMENT STIFFNESS MATRICES ............:     0.02
+  - FORM GLOBAL LOAD VECTOR ....................:     0.00
+  - FORM TOTAL STIFFNESS MATRICES ..............:     0.02
+  - P-DELTA ANALYSIS ...........................:     0.00
+  - STATIC ANALYSIS ............................:     0.12
+  - MOVING LOAD ANALYSIS .......................:     0.00
+  - SETTLEMENT ANALYSIS ........................:     0.00
+  - EIGENVALUE EXTRACTION ......................:     0.00
+  - RESPONSE SPECTRUM ANALYSIS .................:     0.00
+  - TIME HISTORY ANALYSIS ......................:     0.00
+  - PRINT DYNAMIC INFORMATION OUTPUT ...........:     0.10
+  - TOTAL ELAPSED TIME .........................:     0.26
